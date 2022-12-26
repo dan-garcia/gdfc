@@ -2,7 +2,7 @@
 //date:     23OCT22
 //ver:      0.1.0-alpha
 // DESC: To be used to copy save files for Grim Dawn from Documents location to
-//       Steam remote location as well as vice versa.
+//       Steam remote location and vice versa.
 
 
 fn main() {
