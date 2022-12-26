@@ -6,3 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+steamlocate = "0.*"
+steamid-ng = "1.*"
+
+[dependencies.steamlocate]
+version = "0.*"
+features = ["steamid_ng"]
