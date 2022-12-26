@@ -7,6 +7,8 @@ edition = "2021"
 
 [dependencies]
 steamid-ng = "1.*"
+dirs-next = "2.*"
+
 
 [dependencies.steamlocate]
 version = "0.*"
