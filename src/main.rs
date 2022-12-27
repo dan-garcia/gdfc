@@ -14,31 +14,26 @@ extern crate steamid_ng;
 // https://docs.rs/dirs-next/latest/dirs_next/
 extern crate dirs_next;
 use std::path::PathBuf;
-use steamlocate::SteamDir;
+use steamlocate::{SteamDir, SteamApp};
 use steamid_ng::SteamID;
 use dirs_next::document_dir;
 
+//  TODO:   fix formatting to match expected rust formatting
+//          both for fns and top of file
+
 fn main()
 {
-    //TODO: review borrowing and correct usages below,
-    //      especially for remote_save_dir
-    //TODO: fix initial formatting to match expected rust formatting
-    //      at top of file
-
     //check if Steam install exists
-    match SteamDir::locate()
+    if get_steam_dir().is_none()
     {
-        Some(_) => (),
-        None => panic!("No Steam install found")
+        panic!("No Steam install found")
     }
-
-    let mut steam_dir : SteamDir = SteamDir::locate().unwrap();
+    let mut steam_dir : SteamDir = get_steam_dir().unwrap();
 
     //check if Grim Dawn is installed
-    match &steam_dir.app(&219990)
+    if get_grim_dawn_dir(&mut steam_dir).is_none()
     {
-        Some(_) => (),
-        None => panic!("No Grim Dawn install directory found")
+        panic!("No Grim Dawn install directory found");
     }
 
     // FIXME need to take in steam3 (or steamid or steam2) as an arg
@@ -74,6 +69,26 @@ fn get_docs_dir() -> Option<PathBuf>
     {
         Some(dir) => return Some(dir),
         None => return None
+    }
+}
+
+fn get_steam_dir() -> Option<SteamDir>
+{
+    match SteamDir::locate()
+    {
+        Some(dir) => return Some(dir),
+        None => return None
+    }
+}
+
+// we need a mutable ref here because steamlocate::SteamDir.app()
+// takes a &mut
+fn get_grim_dawn_dir(sdir : &mut SteamDir) -> Option<SteamApp>
+{
+    match sdir.app(&219990)
+    {
+        Some(app) => return Some(app.to_owned()),
+        None => panic!("No Grim Dawn install directory found")
     }
 }
 
