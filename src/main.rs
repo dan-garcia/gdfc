@@ -57,11 +57,11 @@ fn main()
     dbg!(&steam_remote_save_dir);
 
     // assemble path for windows steam non-remote save directory
-    let mut steam_mydoc_save_dir : PathBuf = PathBuf::new();
     if get_mydocs_dir().is_none()
     {
         panic!("No default \"Documents\" directory found");
     }
+    let mut steam_mydoc_save_dir : PathBuf = PathBuf::new();
     steam_mydoc_save_dir.push(get_mydocs_dir().unwrap().as_path());
     steam_mydoc_save_dir.push("My Games\\Grim Dawn\\save");
     dbg!(&steam_mydoc_save_dir);
