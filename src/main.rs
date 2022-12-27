@@ -1,6 +1,6 @@
 // Author:  Daniel Garcia
-// date:    23OCT22
-// ver:     0.1.0-alpha
+// date:    26DEC22
+// ver:     0.1.1-alpha
 // DESC:    To be used to copy save files for Grim Dawn from Documents location to
 //          Steam remote location and vice versa.
 // DEPS:    steamlocate 0.*
