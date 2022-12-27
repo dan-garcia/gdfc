@@ -46,21 +46,35 @@ fn main()
     // as well as change to unwrap_or() or unwrap_or_*()
     let steam3_id : SteamID = SteamID::from_steam3("[U:1:6620387]").unwrap();
     let steam_account_id : u32 = SteamID::account_id(&steam3_id);
-    dbg!(steam_account_id);
+    dbg!(&steam_account_id);
 
     // assemble path for remote save directory
     let steam_install_dir : &PathBuf = &steam_dir.path;
     let mut steam_remote_save_dir : PathBuf = steam_install_dir.to_path_buf();
     steam_remote_save_dir.push("userdata\\");
-    steam_remote_save_dir.push(steam_account_id.to_string()+"\\");
-    steam_remote_save_dir.push("219990\\remote\\save\\");
-    dbg!(steam_remote_save_dir);
+    steam_remote_save_dir.push(steam_account_id.to_string());
+    steam_remote_save_dir.push("219990\\remote\\save");
+    dbg!(&steam_remote_save_dir);
 
     // assemble path for windows steam non-remote save directory
-    let mut steam_mydoc_save_dir : PathBuf = document_dir().unwrap_or_default();
-    steam_mydoc_save_dir.push("\\");
-    steam_mydoc_save_dir.push("My Games\\Grim Dawn\\save\\");
-    dbg!(steam_mydoc_save_dir);
+    let mut steam_mydoc_save_dir : PathBuf = PathBuf::new();
+    if get_mydocs_dir().is_none()
+    {
+        panic!("No default \"Documents\" directory found");
+    }
+    steam_mydoc_save_dir.push(get_mydocs_dir().unwrap().as_path());
+    steam_mydoc_save_dir.push("My Games\\Grim Dawn\\save");
+    dbg!(&steam_mydoc_save_dir);
+
+}
+
+fn get_mydocs_dir() -> Option<PathBuf>
+{
+    match document_dir()
+    {
+        Some(dir) => return Some(dir),
+        None => return None
+    }
 }
 
 fn copy_mydoc_to_steam()
