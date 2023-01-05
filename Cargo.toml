@@ -9,4 +9,4 @@ edition = "2021"
 steamid-ng = "1.*"
 dirs-next = "2.*"
 steamlocate = {version = "0.*", features = ["steamid_ng"]}
-clap = {version = "4.0", features = ["derive"] }
+clap = {version = "4.*", features = ["derive"] }
