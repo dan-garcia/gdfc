@@ -21,7 +21,7 @@ use dirs_next::document_dir;
 //  TODO:   fix formatting to match expected rust formatting
 //          both for fns and top of file
 
-fn main()
+fn main() -> Result<(), Box<dyn std::error::Error>>
 {
     //check if Steam install exists
     if get_steam_dir().is_none()
@@ -60,6 +60,8 @@ fn main()
     steam_mydoc_save_dir.push(get_docs_dir().unwrap().as_path());
     steam_mydoc_save_dir.push("My Games\\Grim Dawn\\save");
     dbg!(&steam_mydoc_save_dir);
+
+    Ok(())
 
 }
 
