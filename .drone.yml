@@ -10,4 +10,3 @@ steps:
   commands:
   - cargo build --verbose --all
   - cargo test --verbose --all
-  # - cargo run -- [U:1:66203873]
