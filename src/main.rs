@@ -88,8 +88,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
         // FIXME we should handle this with more grace
         Err(e) => panic!("Error: {}", e)
     }
-
-    match steam_doc_save_dir.try_exists()
+    match steam_remote_save_dir.try_exists()
     {
         Ok(_) => (),
         // FIXME we should handle this with more grace
@@ -147,3 +146,4 @@ fn get_grim_dawn_dir(sdir : &mut SteamDir) -> Option<SteamApp>
 // {
 
 // }
+
