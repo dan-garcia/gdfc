@@ -76,10 +76,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
         // FIXME we should handle this with more grace
         panic!("No default \"Documents\" directory found");
     }
-    let mut steam_mydoc_save_dir : PathBuf = PathBuf::new();
-    steam_mydoc_save_dir.push(get_docs_dir().unwrap().as_path());
-    steam_mydoc_save_dir.push("My Games\\Grim Dawn\\save");
-    dbg!(&steam_mydoc_save_dir);
+    let mut steam_doc_save_dir : PathBuf = PathBuf::new();
+    steam_doc_save_dir.push(get_docs_dir().unwrap().as_path());
+    steam_doc_save_dir.push("My Games\\Grim Dawn\\save");
+    dbg!(&steam_doc_save_dir);
+
+    // check that dirs exist
+    match steam_doc_save_dir.try_exists()
+    {
+        Ok(_) => (),
+        // FIXME we should handle this with more grace
+        Err(e) => panic!("Error: {}", e)
+    }
+
+    match steam_doc_save_dir.try_exists()
+    {
+        Ok(_) => (),
+        // FIXME we should handle this with more grace
+        Err(e) => panic!("Error: {}", e)
+    }
 
     Ok(())
 
