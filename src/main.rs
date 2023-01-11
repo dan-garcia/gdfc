@@ -82,18 +82,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
     dbg!(&steam_doc_save_dir);
 
     // check that dirs exist
-    match steam_doc_save_dir.try_exists()
-    {
-        Ok(_) => (),
-        // FIXME we should handle this with more grace
-        Err(e) => panic!("Error: {}", e)
-    }
-    match steam_remote_save_dir.try_exists()
-    {
-        Ok(_) => (),
-        // FIXME we should handle this with more grace
-        Err(e) => panic!("Error: {}", e)
-    }
+    steam_doc_save_dir.try_exists()?;
+    steam_remote_save_dir.try_exists()?;
+
 
     Ok(())
 
