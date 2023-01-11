@@ -51,7 +51,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
     if get_steam_dir().is_none()
     {
         // FIXME we should handle this with more grace
-        panic!("No Steam install found")
+        panic!("Error: No Steam install found")
     }
     let mut steam_dir : SteamDir = get_steam_dir().unwrap();
 
@@ -59,7 +59,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
     if get_grim_dawn_dir(&mut steam_dir).is_none()
     {
         // FIXME we should handle this with more grace
-        panic!("No Grim Dawn install directory found");
+        panic!("Error: No Grim Dawn install directory found");
     }
 
     // assemble path for remote save directory
