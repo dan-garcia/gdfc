@@ -123,8 +123,8 @@ fn get_grim_dawn_dir(sdir : &mut SteamDir) -> Option<SteamApp>
 {
     match sdir.app(&219990)
     {
-        Some(app) => return Some(app.to_owned()),
-        None => panic!("No Grim Dawn install directory found")
+        Some(app) => Some(app.to_owned()),
+        None => None
     }
 }
 
