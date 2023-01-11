@@ -79,8 +79,8 @@ fn get_docs_dir() -> Option<PathBuf>
 {
     match document_dir()
     {
-        Some(dir) => return Some(dir),
-        None => return None
+        Some(dir) => Some(dir),
+        None => None
     }
 }
 
@@ -91,8 +91,8 @@ fn get_steam_dir() -> Option<SteamDir>
 {
     match SteamDir::locate()
     {
-        Some(dir) => return Some(dir),
-        None => return None
+        Some(dir) => Some(dir),
+        None => None
     }
 }
 
