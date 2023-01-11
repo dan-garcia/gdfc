@@ -39,14 +39,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
     // parse args w/clap
     let passed_args = Args::parse();
 
-    // FIXME need proper validation of steamid3 passed from args
-    // currently just defaults to a bogus ID
-    let steam_id : SteamID = SteamID::from_steam3(&passed_args.steamid3)
-                                    .unwrap_or(SteamID::from_steam3("[U:1:1234567]").unwrap());
-    dbg!(&steam_id);
-    let steam_account_id : u32 = SteamID::account_id(&steam_id);
-    dbg!(&steam_account_id);
-
     // check if Steam install exists
     if get_steam_dir().is_none()
     {
@@ -66,7 +58,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>>
     let steam_install_dir : &PathBuf = &steam_dir.path;
     let mut steam_remote_save_dir : PathBuf = steam_install_dir.to_path_buf();
     steam_remote_save_dir.push("userdata\\");
-    steam_remote_save_dir.push(steam_account_id.to_string());
+    // Veeeery clunky way of grabbing user steam account id
+    // double unwrap? v likely simplifiable
+    let steam_account_id = 
+    {
+        let mut i = std::fs::read_dir(&steam_remote_save_dir.as_path())?;
+        i.nth(0).unwrap().unwrap().path()
+    };
+    dbg!(&steam_account_id);
+    steam_remote_save_dir.push(steam_account_id);
     steam_remote_save_dir.push("219990\\remote\\save");
     dbg!(&steam_remote_save_dir);
 
@@ -137,4 +137,3 @@ fn get_grim_dawn_dir(sdir : &mut SteamDir) -> Option<SteamApp>
 // {
 
 // }
-
