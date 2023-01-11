@@ -13,32 +13,14 @@ extern crate steamlocate;
 extern crate steamid_ng;
 // https://docs.rs/dirs-next/latest/dirs_next/
 extern crate dirs_next;
-// https://docs.rs/clap/latest/clap/
-extern crate clap;
+
 
 use std::path::PathBuf;
 use steamlocate::{SteamDir, SteamApp};
-use steamid_ng::SteamID;
 use dirs_next::document_dir;
-use clap::Parser;
-
-// FIXME add in tags for proper arg flags
-#[derive(Parser)]
-// FIXME about and author are not being picked up here?
-#[command(author, version, about, long_about = None)]
-struct Args
-{
-    // SteamID3 as string
-    steamid3 : String,
-    #[arg(short, long)]
-    debug : bool,
-}
 
 fn main() -> Result<(), Box<dyn std::error::Error>>
 {
-    // parse args w/clap
-    let passed_args = Args::parse();
-
     // check if Steam install exists
     if get_steam_dir().is_none()
     {

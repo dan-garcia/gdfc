@@ -11,4 +11,3 @@ about = "Simple CLI tool to transfer Grim Dawn save files from Steam's remote sa
 steamid-ng = "1.*"
 dirs-next = "2.*"
 steamlocate = {version = "1.*", features = ["steamid_ng"]}
-clap = {version = "4.*", features = ["derive"] }
